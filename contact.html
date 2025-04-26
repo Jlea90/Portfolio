@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="whole.css">
+    <link rel="stylesheet" href="contact.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8b+z4+2e5c7e5a5e5e5e5e5e5e5e5e5e5e5" crossorigin="anonymous">
+    </head>
+<body>
+    <header>
+        <div class="desktop-nav">
+            <div class="logo-container">
+            <img src="images/jo-logo.png" alt="Jo's Logo" class="logo-static">
+            <img src="images/jo-logo.gif" alt="Jo's Logo" class="logo-hover">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#portfolio">Portfolio</a></li>
+                    <li><a href="index.html#service">Service Breakdown</a></li>
+                    <li><a href="contact.html">Contact Jo</a></li>
+                </ul>
+            </nav>
+        </div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#portfolio">Portfolio</a></li>
+                <li><a href="index.html#service">Service Breakdown</a></li>
+                <li><a href="contact.html">Contact Jo</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero">
+            <img src="images/contact-me.gif" alt="Contact Us Image">
+            
+        </div>
+
+        <section id="contact-section">
+            <h2>Let’s Work Together</h2>
+            <hr>
+            <p style="text-align: center; padding: 20px; color:rgb(49, 49, 49); font-weight:600; margin-bottom: 40px;">I’m always open to discussing product design work or partnerships.<br>
+              Whether you’re looking for a custom website, UI/UX design, or need an extra developer on your team<br> — I’d love to help!  
+              <br>I’m currently open to freelance projects and contract roles.<br>  
+              Just fill out the form below, and I’ll get back to you soon!
+            </p>
+            
+            <div class="contact-container">
+            <h2>Contact Form</h2>
+            <form id="contact-form" name="contact" method="POST" data-netlify="true">
+                <input type="hidden" name="form-name" value="contact">
+
+                <label for="name">First Name:</label>
+                <input type="text" id="name" name="first-name" required>
+
+                <label for="surname">Last Name:</label>
+                <input type="text" id="surname" name="surname" required>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="preferred-contact">Preferred Contact Method (optional):</label>
+                <select id="preferred-contact" name="preferred-contact">
+                <option value="" disabled selected>Select one</option>
+                <option value="email">Email</option>
+                <option value="phone">Phone Call</option>
+                <option value="zoom">Video Call</option>
+                </select>
+
+                <label for="topic">Reason for Contact:</label>
+                <select id="topic" name="topic" required>
+                <option value="" disabled selected>Select a reason</option>
+                <option value="website">I need a website designed</option>
+                <option value="uiux">I need UI/UX design help</option>
+                <option value="team">I’m hiring a contract developer</option>
+                <option value="other">Other</option>
+                </select>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Send Message</button>
+            </form></div>
+
+            <div class="form-complete">
+                <div class="form-success-content">
+                  <span class="close-success">&times;</span>
+                  <img src="images/success.gif" alt="Success Image">
+                </div>
+              </div>
+        </section>
+        <hr>
+    </main>
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 JO WEB DESIGNS. All rights reserved.</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="contact.html">Contact Us</a>
+    </footer>
+    <script src="whole.js"></script>
+</body>
+    
+
+    </html>
+
