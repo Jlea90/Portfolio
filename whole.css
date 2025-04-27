@@ -20,6 +20,8 @@ header {
     padding: 10px;
     position: fixed;
     z-index: 10000;
+    display: flex;
+    justify-content: space-between;
     top: 0;
     width: 100%;
     text-align: center;
@@ -95,47 +97,69 @@ header .desktop-nav {
    
 }
 
-.mobile-nav {
+.fab-menu {
     display: none;
 }
-.mobile-nav img {
-    width: 50px;
-    height: 50px;
-    left: 0;
-    top: 0;
-    position: relative;
-}
-.mobile-nav nav li {
-    display: inline-block;
-    margin: 0 15px;
-}
-.mobile-nav nav li a {
-    color: #f5eeec;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: bold;
-    
-}
-.mobile-nav nav li a:hover {
-    color: #93613d;
-    text-decoration: underline;
-    scale: 1.1;
-    transition: all 0.3s ease-in-out;
-}
-
-@media screen and (max-width: 668px) {
-    .desktop-nav {
+@media screen and (max-width: 868px) {
+    header .desktop-nav {
         display: none;
     }
-    .mobile-nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .mobile-nav nav li {
-        display: block;
-        margin: 0 5px;
-    }
+    /* show FAB */
+  .fab-menu {
+    display: block;
+    position: fixed;
+    bottom: auto;
+    top: 15px;     /* position it near the top */
+    right: 15px;
+    z-index: 10001;
+  }
+
+  /* the round toggle button */
+  .fab-menu #fab-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: #93613d;
+    color: #fff;
+    border: none;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+
+  /* hidden menu items container */
+  .fab-items {
+    position: absolute;
+    bottom: auto;
+    top: 60px;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    gap: 0.5rem;
+    background: rgba(46, 45, 45, 0.95);
+    border-radius: 8px;
+    padding: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+
+  /* when expanded, show items */
+  .fab-menu.expanded .fab-items {
+    display: flex;
+  }
+
+  .fab-items a {
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #eceae6;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background 0.2s;
+  }
+
+  .fab-items a:hover {
+    background: #7c523477;
+  }
     
 }
 
@@ -188,6 +212,9 @@ main {
     margin: 0 auto;
 }
 
+/*portfolio*/
+/* ── DESKTOP GRID ───────────────────────────────────────────────────────────── */
+
 .gallery-grid {
     display: flex;
     flex-wrap: wrap;
@@ -195,65 +222,96 @@ main {
     justify-content: center;
   }
   
-  .project {
+  .gallery-grid .project {
     width: 300px;
     text-align: center;
   }
   
+  .gallery-grid .project-video {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
+  }
+  
+  /* subtle scale/color on hover only in the grid */
+  @media (min-width: 769px) {
+    .gallery-grid .project-video:hover {
+      filter: grayscale(0%);
+      transform: scale(1.05);
+      z-index: 2;
+    }
+  }
+  
+  /* ── COMMON VIDEO STYLING ───────────────────────────────────────────────────── */
+  
   .project-video {
     width: 100%;
-  max-width: 300px; /* adjust to fit your layout */
-  height: 200px;     /* fixed height for consistency */
-  object-fit: cover; /* keeps aspect visually balanced */
-  border-radius: 10px;
-  filter: grayscale(100%);
-  transition: transform 0.3s ease, filter 0.3s ease;
-  cursor: pointer;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: transform 0.3s ease, filter 0.3s ease;
+    cursor: pointer;
   }
   
-  /* Autoplay on hover */
-  .project-video:hover {
-    animation-play-state: running;
+  /* enlarged lightbox state for all videos */
+  .project-video.expanded {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 90vw;
+    height: auto;
+    max-height: 80vh;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    filter: none;
+    cursor: zoom-out;
   }
   
-  /* Carousel (hidden on desktop) */
+  /* ── CAROUSEL (SHOW ON MOBILE) ──────────────────────────────────────────────── */
+  
   .gallery-carousel {
     display: none;
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-snap-type: x mandatory;
-    padding: 1rem 0;
   }
   
-  .carousel-item {
-    display: inline-block;
-    width: 80vw;
-    max-width: 400px;
-    margin-right: 1rem;
-    scroll-snap-align: start;
-  }
-
-  /* Hover (or active tap on mobile) */
-.project-video:hover,
-.project-video:focus,
-.project-video:active {
-  filter: grayscale(0%);
-  transform: scale(1.05);
-  z-index: 2;
-}
-  
-  /* Show carousel and hide grid on mobile */
   @media (max-width: 768px) {
-    .gallery-grid {
-      display: none;
+    /* hide the grid, show the carousel wrapper */
+    .gallery-grid     { display: none !important; }
+    .gallery-carousel { display: flex; align-items: center; }
+  
+    .carousel-track-container {
+      overflow: hidden;
+      flex: 1;
+    }
+    .carousel-track {
+      display: flex;
+      transition: transform 0.3s ease;
+    }
+    .carousel-item {
+      min-width: 100%;
+      box-sizing: border-box;
+      padding: 0 1rem;
     }
   
-    .gallery-carousel {
-      display: block;
+    /* override grid-hover styles so carousel videos stay static */
+    .carousel-item .project-video:hover {
+      transform: none;
+      filter: none;
     }
-
+  
+    .carousel-btn {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      font-size: 2rem;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    .prev-btn { margin-right: 0.5rem; }
+    .next-btn { margin-left:  0.5rem; }
   }
-  
+/*Services*/  
 .service-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -399,6 +457,13 @@ main {
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+@media screen and (max-width: 668px) {
+    #skills .mobile-ready {
+      display: none;
+    }
+    
 }
 
 .skill-container {

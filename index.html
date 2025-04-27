@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us</title>
     <link rel="stylesheet" href="whole.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOM8b+z4+2e5c7e5a5e5e5e5e5e5e5e5e5e5e5" crossorigin="anonymous">
+    >
 </head>
 </html>
 <body>
     <header>
-        <div class="desktop-nav">
-            <div class="logo-container">
+        <div class="logo-container">
             <img src="images/jo-logo.png" alt="Jo's Logo" class="logo-static">
             <img src="images/jo-logo.gif" alt="Jo's Logo" class="logo-hover">
             </div>
+        <div class="desktop-nav">
+            
             <nav>
                 <ul>
                     <li><a href="index.html">Home</a></li>
@@ -26,15 +26,17 @@
                 </ul>
             </nav>
         </div>
-        <nav class="mobile-nav">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#portfolio">Portfolio</a></li>
-                <li><a href="index.html#service">Service Breakdown</a></li>
-                <li><a href="contact.html">Contact Jo</a></li>
-            </ul>
-        </nav>
+        <div class="fab-menu">
+            <button id="fab-toggle">+</button>
+            <div class="fab-items">
+              <a href="index.html">Home</a>
+              <a href="#about">About</a>
+              <a href="#portfolio">Portfolio</a>
+              <a href="#service">Services</a>
+              <a href="contact.html">Contact</a>
+            </div>
+          </div>
+            
     </header>
 
     <main>
@@ -49,60 +51,28 @@
 
         <section id="portfolio" class="portfolio-section">
             <h2>Past Work</h2>
-          
-            <!-- Desktop Grid Gallery -->
-            <div class="gallery-grid">
-              <div class="project">
-                <video class="project-video" src="videos/example-consult-site.mp4" muted loop></video>
-                <p class="project-desc">Created a redesign for a pet consultation company as a project. Take note of different designs used for desktop vs. mobile.</p>
-              </div>
-              <div class="project">
-                <video class="project-video" src="videos/miss-e.mp4" muted loop></video>
-                <p class="project-desc">Designed and developed simple educational website for teacher for her students.</p>
-              </div>
-              <div class="project">
-                <video class="project-video" src="videos/angualr-app.mp4" muted loop></video>
-                <p class="project-desc">Created Angular app with its components of the map of the world, integrating information from an API to the map.</p>
-              </div>
-              <div class="project">
-                <video class="project-video" src="videos/author.mp4" muted loop></video>
-                <p class="project-desc">Developed a simple website for a mystery author and designed logos for her image as requested.</p>
-              </div>
-              <div class="project">
-                <video class="project-video" src="videos/college-project.mp4" muted loop></video>
-                <p class="project-desc">College project of a website of my home state.</p>
-              </div>
-            </div>
-          
-            <!-- Mobile Carousel (hidden by default) -->
-            <div class="gallery-carousel">
-              <div class="carousel-track">
-                <div class="carousel-item">
-                    <video class="project-video" src="videos/example-consult-site.mp4" muted loop></video>
-                    <p class="project-desc">Created a redesign for a pet consultation company as a project. Take note of different designs used for desktop vs. mobile.</p>
-                  </div>
-                <div class="carousel-item">
-                    <video class="project-video" src="videos/miss-e.mp4" muted loop></video>
-                    <p class="project-desc">Designed and developed simple educational website for teacher for her students.</p>
-                  </div>
-                <div class="carousel-item">
-                    <video class="project-video" src="videos/angualr-app.mp4" muted loop></video>
-                    <p class="project-desc">Created Angular app with its components of the map of the world, integrating information from an API to the map.</p>
-              </div>
-                <div class="carousel-item">
-                    <video class="project-video" src="videos/author.mp4" muted loop></video>
-                    <p class="project-desc">Developed a simple website for a mystery author and designed logos for her image as requested.</p>
-                  </div>
-                <div class="carousel-item">
-                    <video class="project-video" src="videos/college-project.mp4" muted loop></video>
-                    <p class="project-desc">College project of a website of my home state.</p>
-                  </div>
-            </div>
+            <hr>
+            <p style="text-align: center; padding: 20px; color:rgb(49, 49, 49); font-weight:600; margin-bottom: 40px;">
+                Check out my portfolio of projects below—more are available upon request. 
+                This presentation highlights my expertise in front-end development and Angular frameworks, 
+                and demonstrates how I incorporated UX and UI design principles at every stage, 
+                from initial wireframes through final mockups.
+            </p>
+
+            <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
+            padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
+            border-radius: 8px; will-change: transform;">
+             <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
+               src="https://www.canva.com/design/DAGlyHwezuY/4sUYN3gggidoleiv_2lyRQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
+             </iframe>
+           </div>
+           
           </section>
           
 
             <section id="service">
                 <h2>What I Offer</h2>
+                <hr>
                 <div class="service-grid">
                   <!-- Service Card 1 -->
                   <div class="service-item">
@@ -166,6 +136,7 @@
 
             <section id="skills">
                 <h2>Skillset</h2>
+                <hr>
                 <img class="mobile-ready" src="images/mobile-ready.gif" alt="Skills Section" class="skills-image">
                 <!-- Front-End Development -->
   <div class="skill-container" id="set-1">
@@ -205,6 +176,7 @@
                 <img src="images/contact-img.gif" alt="Contact Section" class="contact-image">
                 </a>
             </section>
+
             <footer>
                 <div class="footer-content">
                     <p>&copy; 2023 Your Company Name. All rights reserved.</p>
@@ -219,6 +191,25 @@
                     <a href="contact.html">Contact Us</a>
             </footer>
             <script src="whole.js"></script>
+            <script>document.addEventListener('DOMContentLoaded', () => {
+                const fabMenu     = document.querySelector('.fab-menu');
+                const fabToggle   = document.getElementById('fab-toggle');
+                const fabItems    = document.querySelector('.fab-items');
+              
+                // Toggle menu open/closed
+                fabToggle.addEventListener('click', e => {
+                  e.stopPropagation();
+                  fabMenu.classList.toggle('expanded');
+                });
+              
+                // Close menu when clicking outside
+                document.addEventListener('click', e => {
+                  if (!e.target.closest('.fab-menu')) {
+                    fabMenu.classList.remove('expanded');
+                  }
+                });
+              });
+            </script>
 </body>
 
 </html>

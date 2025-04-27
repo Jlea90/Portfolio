@@ -1,12 +1,18 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* add this at the very top of your CSS */
+*, *::before, *::after {
+    box-sizing: border-box;
+  }
+  
 section {
     margin-top: 60px;
     width: 100%;
     margin-bottom: 60px;
 }
 .contact-container{
+    width: 100%;
     max-width: 700px;
     margin: 0 auto;
     padding: 20px;
@@ -55,7 +61,7 @@ form input[name="phone"],
 form input[type="email"] {
     padding: 10px;
     border: 1px solid #93613d;
-    max-width: 300px;
+    width: 50%;
     font-family: 'montserrat', sans-serif;
     border-radius: 4px;
     background-color: #93613d30;
@@ -66,6 +72,7 @@ form input[type="email"] {
 form textarea {
     padding: 10px;
     border: 1px solid #93613d;
+    width: 80%;
     max-width: 600px;
     border-radius: 4px;
     background-color: #93613d30;
@@ -100,18 +107,7 @@ form label {
     display: block;
   }
   
-  form input,
-  form select,
-  form textarea {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    border: 1px solid #93613d;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
+ 
   form input:focus,
   form select:focus,
   form textarea:focus {
@@ -141,37 +137,138 @@ form label {
     background-color: #7a4f30;
   }
 
-  .form-complete {
-    display: none;
+  /* Base styling for all selects */
+form select {
+    /* Make it full-width but respect any container max-width */
+    width: 60%;
+   
+    /* Padding for tappable area */
+    padding: 0.75rem 1rem;
+    /* Consistent font */
+    font-family: inherit;
+    font-size: 1rem;
+    line-height: 1.5;
+    /* Borders & background */
+    border: 1px solid #93613d;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    /* Remove native arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Space for our custom arrow */
+    background-image: 
+      linear-gradient(45deg, transparent 50%, #333 50%),
+      linear-gradient(135deg, #333 50%, transparent 50%);
+    background-position: 
+      calc(100% - 1rem) calc(50% - 0.25rem),
+      calc(100% - 0.75rem) calc(50% - 0.25rem);
+    background-size: 0.5rem 0.5rem;
+    background-repeat: no-repeat;
+  }
+  
+  /* On focus, highlight border */
+  form select:focus {
+    border-color: #93613d;
+    box-shadow: 0 0 5px rgba(147, 97, 61, 0.4);
+    outline: none;
+  }
+  
+  /* Optional: slightly darker background on open (supported in some browsers) */
+  form select:focus::-ms-value {
+    background-color: #fff;
+  }
+  
+  /* Ensure the label + select stack nicely on mobile */
+  @media (max-width: 600px) {
+    form label {
+      font-size: 1.1rem;
+    }
+  
+    form select {
+      font-size: 1rem;
+      padding: 0.6rem 0.8rem;
+    }
+  }
+
+  .form-complete { 
+    display: none;             /* hidden by default */
     position: fixed;
+    top: 0; left: 0;
     width: 100vw;
     height: 100vh;
+    z-index: 9999;
+  
+    /* flex centering when shown */
     justify-content: center;
     align-items: center;
-    z-index: 9999;
+    flex-direction: column;
+    background: rgba(0,0,0,0.6); /* optional dark overlay */
   }
   
   .form-success-content {
     position: relative;
-    background: #ffffff2c;
-    padding: 2rem;
-    border-radius: 12px;
+    padding: 0;
     max-width: 90%;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   }
   
   .form-success-content img {
+    width: 100%;
     max-width: 500px;
-    margin-bottom: 1rem;
+    display: block;
   }
-
   
   .close-success {
     position: absolute;
-    top: 10px;
-    right: 15px;
-    font-size: 1.8rem;
-    color: #333;
+    top: 8px;
+    right: 12px;
+    font-size: 2rem;
+    color: #fff;
     cursor: pointer;
+    z-index: 10000;
   }
+  
+
+  /* MOBILE OPTIMIZATIONS (≤600px) */
+@media (max-width: 600px) {
+
+    /* Shrink the container padding & remove side margins */
+    .contact-container {
+      padding: 1rem;
+      background-color: #090909;
+      border-radius: 6px;
+    }
+  
+    /* Form itself full‐width and lighter background */
+    form {
+      padding: 1rem;
+      background: #f9f9f9;
+      box-shadow: none;
+      gap: 1rem;
+    }
+  
+    /* Labels a bit larger and darker for readability */
+    form label {
+      font-size: 1.1rem;
+      color: #222;
+    }
+  
+    /* Inputs/textarea full width, tighter padding */
+    form input,
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 0.6rem 0.8rem;
+      font-size: 1rem;
+    }
+  
+    /* Submit button full‐width, easy tap area */
+    form button[type="submit"] {
+      width: 100%;
+      font-size: 1.1rem;
+      padding: 0.75rem 1rem;
+    }
+  }
+  
   
