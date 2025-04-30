@@ -27,15 +27,17 @@
             </nav>
         </div>
         <div class="fab-menu">
-            <button id="fab-toggle">+</button>
-            <div class="fab-items">
-              <a href="index.html">Home</a>
-              <a href="#about">About</a>
-              <a href="#portfolio">Portfolio</a>
-              <a href="#service">Services</a>
-              <a href="contact.html">Contact</a>
-            </div>
+          <button id="fab-toggle" aria-label="Open menu">☰</button>
+          <div class="fab-items">
+            <button class="fab-close" aria-label="Close menu">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#portfolio">Portfolio</a>
+            <a href="index.html#service">Services</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="contact.html">Contact</a>
           </div>
+        </div>
             
     </header>
 
@@ -124,27 +126,34 @@
     </footer>
     <script src="whole.js"></script>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const fabMenu     = document.querySelector('.fab-menu');
-        const fabToggle   = document.getElementById('fab-toggle');
-        const fabItems    = document.querySelector('.fab-items');
-      
-        // Toggle menu open/closed
-        fabToggle.addEventListener('click', e => {
-          e.stopPropagation();
-          fabMenu.classList.toggle('expanded');
-        });
-      
-        // Close menu when clicking outside
-        document.addEventListener('click', e => {
-          if (!e.target.closest('.fab-menu')) {
-            fabMenu.classList.remove('expanded');
-          }
-        });
-
-      });
-    </script>
+    
+   <script>
+              document.addEventListener('DOMContentLoaded', () => {
+                const fabMenu   = document.querySelector('.fab-menu');
+                const fabToggle = document.getElementById('fab-toggle');
+                const fabClose  = document.querySelector('.fab-close');
+              
+                // Open/close via the FAB button
+                fabToggle.addEventListener('click', e => {
+                  e.stopPropagation();
+                  fabMenu.classList.toggle('expanded');
+                });
+              
+                // Close via the X button
+                fabClose.addEventListener('click', e => {
+                  e.stopPropagation();
+                  fabMenu.classList.remove('expanded');
+                });
+              
+                // Close when clicking anywhere outside the menu
+                document.addEventListener('click', e => {
+                  if (!e.target.closest('.fab-menu')) {
+                    fabMenu.classList.remove('expanded');
+                  }
+                });
+              });
+              </script>
+    
    <script>
     document.addEventListener('DOMContentLoaded', () => {
       const form         = document.getElementById('contact-form');
