@@ -11,6 +11,24 @@ section {
     width: 100%;
     margin-bottom: 60px;
 }
+
+.hero .desktop-hero-contact {
+  display: block;
+  width: 100%;
+}
+.hero .mobile-hero-contact {
+  display: none;
+  width: 100%;
+}
+@media screen and (max-width: 777px) {
+  .hero .desktop-hero-contact {
+    display: none;
+  }
+  .hero .mobile-hero-contact {
+    display: block;
+  }
+  
+}
 .contact-container{
     width: 100%;
     max-width: 700px;
@@ -30,13 +48,34 @@ section {
 
 }
 
-.contact-container p {
-    text-align: center;
-    margin-bottom: 20px;
-    color: rgb(248, 244, 239);
+section .contact-p {
+  text-align: justify;
+  padding: 20px 30px 10px 30px;
+  margin-bottom: 20px;
+  line-height: 1.5;
+  color: rgb(56, 56, 56);
 }
 
-.contact-container form {
+@media screen and (max-width: 777px) {
+    section h2 {
+        font-size: 1.5rem;
+    }
+    section .contact-p {
+        font-size: 1rem;
+        text-align: left;
+        letter-spacing: 2px;
+        line-height: 1.5;
+        margin: 0 auto;
+        padding: 20px 20px 20px 30px;
+        color: rgb(56, 56, 56);
+    }
+    section {
+        padding: 10px;
+    }
+  
+}
+
+section form {
     display: flex;
     flex-direction: column;
     gap: 15px;

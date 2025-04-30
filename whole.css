@@ -1,19 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Tuffy:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+/* — Global box-sizing if you haven’t already — */
+*, *::before, *::after { 
+  box-sizing: border-box; }
+
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    box-sizing: border-box;
-}
-
-body {
+   overflow-x: hidden;
+    scroll-behavior: smooth;
+    color:#555451;
     background-color: #d9d9d9;
     font-family: "Montserrat", sans-serif;
-    color:#555451;
-   
 }
+
 
 header {
     background-color: #100f0d;
@@ -97,71 +99,98 @@ header .desktop-nav {
    
 }
 
-.fab-menu {
-    display: none;
-}
-@media screen and (max-width: 868px) {
-    header .desktop-nav {
-        display: none;
-    }
-    /* show FAB */
-  .fab-menu {
-    display: block;
-    position: fixed;
-    bottom: auto;
-    top: 15px;     /* position it near the top */
-    right: 15px;
-    z-index: 10001;
-  }
+@media screen and (max-width: 768px) {
+  /* hide the desktop nav */
+  header .desktop-nav { display: none; }
 
-  /* the round toggle button */
-  .fab-menu #fab-toggle {
-    width: 56px;
-    height: 56px;
+  /* FAB toggle button */
+  .fab-menu {
+    position: fixed;
+    top: 10px;    /* same as your header’s padding */
+    right: 15px;
+    z-index: 10000;  /* same as header so toggle sits side-by-side */
+  }
+   /* style the close button */
+   .fab-items .fab-close {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    color: #eceae6;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10001; /* above the links */
+  }
+  .fab-items .fab-close:hover {
+    color: #93613d;
+  }
+  #fab-toggle {
+    width: 46px; height: 46px;
     border-radius: 50%;
     background-color: #93613d;
     color: #fff;
     border: none;
-    font-size: 2rem;
-    line-height: 1;
+    font-size: 1.8rem;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
   }
 
-  /* hidden menu items container */
+  /* full-screen dim + blur overlay behind menu */
+  .fab-menu.expanded::before {
+    content: "";
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+  }
+
+  /* Slide-in side drawer */
   .fab-items {
-    position: absolute;
-    bottom: auto;
-    top: 60px;
+    position: fixed;
+    top: 0;               /* flush under header (header has z-index:10000) */
     right: 0;
-    display: none;
-    flex-direction: column;
-    gap: 0.5rem;
-    background: rgba(46, 45, 45, 0.95);
-    border-radius: 8px;
-    padding: 0.5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  }
-
-  /* when expanded, show items */
-  .fab-menu.expanded .fab-items {
+    width: 75vw;
+    max-width: 300px;
+    height: 100vh;
+    background: #2e2d2d;  /* or your chosen dark shade */
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    padding-top: 70px;    /* match header height so items start below it */
+    padding-left: 1rem;
     display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    z-index: 10000;       /* same as header so header always on top */
+    border-radius: 0;     /* no rounding on edges */
   }
 
+  .fab-menu.expanded .fab-items {
+    transform: translateX(0);
+  }
+
+  /* Link styling inside the drawer */
   .fab-items a {
-    padding: 0.5rem 1rem;
-    text-decoration: none;
     color: #eceae6;
+    text-decoration: none;
     font-weight: bold;
-    border-radius: 4px;
-    transition: background 0.2s;
+    padding: 0.75rem 0;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
-
   .fab-items a:hover {
-    background: #7c523477;
+    background: rgba(147,97,61,0.2);
+    transform: translateX(5px);
   }
-    
+  .fab-items a:active {
+    background: rgba(147,97,61,0.35);
+    transform: translateX(10px);
+  }
 }
+
 
 main {
     max-width: 1200px;
@@ -174,143 +203,144 @@ main {
     position: relative;
     width: 100%;
 }
-.hero img {
+.hero a .hero-image{
     width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
-.hero .contact-link {
-    bottom: 0;
-    left: 30px;
-    position: relative;
-    width: 100px;
-    height: 60px;
-    background-color: #93613d6f;
-    border: 1px solid #93613d;
+.hero a .hero-image-mobile {
+    display: none;
+
 }
 
 @media screen and (max-width: 668px) {
-    .hero .contact-link {
-        bottom: 100px;
-        right: -500px;
-        z-index: 2;
+    .hero a .hero-image-mobile {
+        display: block;
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
         position: relative;
-        width: 250px;
-        height: 60px;
-        background-color: #93613d30;
-        border: 1px solid #93613d;
     }
-    
+    .hero a .hero-image {
+        display: none;
+    }
+  
 }
 
-.about-section img {
+
+.about-section .about-image {
     width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
 }
 
-/*portfolio*/
-/* ── DESKTOP GRID ───────────────────────────────────────────────────────────── */
-
-.gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-  }
-  
-  .gallery-grid .project {
-    width: 300px;
-    text-align: center;
-  }
-  
-  .gallery-grid .project-video {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: transform 0.3s ease, filter 0.3s ease;
-    cursor: pointer;
-  }
-  
-  /* subtle scale/color on hover only in the grid */
-  @media (min-width: 769px) {
-    .gallery-grid .project-video:hover {
-      filter: grayscale(0%);
-      transform: scale(1.05);
-      z-index: 2;
-    }
-  }
-  
-  /* ── COMMON VIDEO STYLING ───────────────────────────────────────────────────── */
-  
-  .project-video {
-    width: 100%;
-    object-fit: cover;
-    filter: grayscale(100%);
-    transition: transform 0.3s ease, filter 0.3s ease;
-    cursor: pointer;
-  }
-  
-  /* enlarged lightbox state for all videos */
-  .project-video.expanded {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 90vw;
-    height: auto;
-    max-height: 80vh;
-    transform: translate(-50%, -50%);
-    z-index: 10000;
-    filter: none;
-    cursor: zoom-out;
-  }
-  
-  /* ── CAROUSEL (SHOW ON MOBILE) ──────────────────────────────────────────────── */
-  
-  .gallery-carousel {
+.about-section .about-image-mobile  {
     display: none;
+}
+
+@media screen and (max-width: 668px) {
+    .about-section .about-image-mobile {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        position: relative;
+
+    }
+    .about-section .about-image {
+        display: none;
+    }
+  
+}
+
+
+  /* ── Portfolio STYLING ───────────────────────────────────────────────────── */
+  
+  .portfolio-embed-container {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;        /* 16:9 ratio */
+    margin: 1.6em 0 0.9em;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(63,69,81,0.16);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* improve mobile performance hint */
+    will-change: transform;
   }
   
-  @media (max-width: 768px) {
-    /* hide the grid, show the carousel wrapper */
-    .gallery-grid     { display: none !important; }
-    .gallery-carousel { display: flex; align-items: center; }
-  
-    .carousel-track-container {
-      overflow: hidden;
-      flex: 1;
-    }
-    .carousel-track {
-      display: flex;
-      transition: transform 0.3s ease;
-    }
-    .carousel-item {
-      min-width: 100%;
-      box-sizing: border-box;
-      padding: 0 1rem;
-    }
-  
-    /* override grid-hover styles so carousel videos stay static */
-    .carousel-item .project-video:hover {
-      transform: none;
-      filter: none;
-    }
-  
-    .carousel-btn {
-      background: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      font-size: 2rem;
-      padding: 0.5rem;
-      cursor: pointer;
-    }
-    .prev-btn { margin-right: 0.5rem; }
-    .next-btn { margin-left:  0.5rem; }
+  .portfolio-embed-container iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    border: none;
+    border-radius: 8px;        /* match the container */
   }
+  
+  /* Hover “lift” effect on non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    .portfolio-embed-container:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(63,69,81,0.24);
+    }
+  }
+  
+  /* Tap feedback on touch devices */
+  @media (hover: none) and (pointer: coarse) {
+    .portfolio-embed-container:active {
+      transform: scale(0.98);
+      box-shadow: 0 1px 4px rgba(63,69,81,0.16);
+    }
+  }
+  
+  /* Extra mobile tweak: ensure full‐width bleed isn’t cut off */
+  @media (max-width: 480px) {
+    .portfolio-embed-container {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  /* Cover overlay */
+.portfolio-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8) url('images/portfolio-overlay.png') no-repeat center 30%;
+  background-size: 100%;   /* optional icon size */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 10;
+  transition: opacity 0.4s ease;
+}
+
+/* Optional hover hint */
+.portfolio-overlay:hover {
+  background-color: rgba(0,0,0,0.7);
+}
+
+/* Once clicked, fade it out */
+.portfolio-embed-container.open .portfolio-overlay {
+  opacity: 0;
+  pointer-events: none;
+}
+
+ 
+ 
+
 /*Services*/  
 .service-grid {
     display: grid;
@@ -372,6 +402,64 @@ main {
     font-size: 14px;
     line-height: 1.3;
   }
+  @media screen and (max-width: 768px) {
+    /* Make the grid a single column and remove extra padding */
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding: 1rem;
+      margin: 0 auto;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      left: 0;
+    }
+  
+    /* Cards fill the width, with left-aligned content */
+    .service-item {
+      width: 100%;
+      padding: 1.5rem;
+      text-align: left;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+  
+    /* Images edge-to-edge */
+    .service-item img {
+      width: 100%;
+      height: auto;
+      max-height: none;
+      margin-bottom: 0.5rem;
+    }
+  
+    /* Headings flush left and a bit smaller */
+    .service-item h3 {
+      text-align: left;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+  
+    /* Paragraphs and lists without extra indent */
+    .service-item p {
+      padding-left: 0;
+      font-size: 0.95rem;
+    }
+    .service-item ul {
+      padding-left: 1rem;
+    }
+    .service-item ul li {
+      font-size: 0.9rem;
+      margin: 0.4rem 0;
+    }
+  
+    /* Buttons (if you have any) full-width */
+    .service-item .price-btn {
+      display: block;
+      width: 100%;
+      margin-top: 1rem;
+    }
+  }
+  
 
 
 
@@ -393,6 +481,16 @@ main {
     border-radius: 10%;
     width: 500px;
     scale: 1.1;
+  }
+
+  @media screen and (max-width: 768px) {
+    section h2 {
+      font-size: 28px;
+      margin: 1rem auto;
+      width: 100%;
+      padding-bottom: 0;
+    }
+    
   }
 
   #ui-ux ul li{
@@ -442,6 +540,17 @@ main {
     text-align: center;
     position: relative;
   }
+
+  @media screen and (max-width: 768px) {
+    .modal-content {
+      width: 100%;
+      padding: 1rem;
+    }
+    .modal-content h2 {
+      font-size: 24px;
+    }
+    
+  }
   
   .close-btn {
     position: absolute;
@@ -458,10 +567,21 @@ main {
     display: block;
     margin: 0 auto;
 }
+#skills .skills-image-mobile{
+    display: none;
+}
 
 @media screen and (max-width: 668px) {
     #skills .mobile-ready {
       display: none;
+    }
+    #skills .skills-image-mobile {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        position: relative;
     }
     
 }
@@ -474,11 +594,29 @@ main {
 }
 
 
-#contact img {
+#contact a .contact-image-home {
     width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
+}
+
+#contact a .contact-image-home-mobile {
+    display: none;
+}
+@media screen and (max-width: 768px) {
+    #contact a .contact-image-home-mobile {
+        display: block;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+       
+    }
+    #contact a .contact-image-home {
+        display: none;
+    }
+  
 }
 
 footer {
@@ -518,3 +656,4 @@ footer .social-icons a {
     font-size: 24px;
     text-decoration: none;
 }
+  

@@ -41,23 +41,24 @@
 
     <main>
         <div class="hero">
-            <img src="images/contact-me.gif" alt="Contact Us Image">
+            <img src="images/contact-me.gif" alt="Contact Us Image" class="desktop-hero-contact">
+            <img src="images/contact-pg-mobile.gif" alt="Contact Us Image" class="mobile-hero-contact">
             
         </div>
 
         <section id="contact-section">
             <h2>Let’s Work Together</h2>
             <hr>
-            <p style="text-align: center; padding: 20px; color:rgb(49, 49, 49); font-weight:600; margin-bottom: 40px;">I’m always open to discussing product design work or partnerships.<br>
-              Whether you’re looking for a custom website, UI/UX design, or need an extra developer on your team<br> — I’d love to help!  
-              <br>I’m currently open to freelance projects and contract roles.<br>  
+            <p class="contact-p">I’m always open to discussing product design work or partnerships.<br>
+              Whether you’re looking for a custom website, UI/UX design, or need an extra developer on your team— I’d love to help!<br>  
+              I’m currently open to freelance projects and contract roles.  
               Just fill out the form below, and I’ll get back to you soon!
             </p>
             
             <div class="contact-container">
             <h2>Contact Form</h2>
-            <form id="contact-form" name="contact" method="POST" data-netlify="true">
-                <input type="hidden" name="form-name" value="contact">
+            <form id="contact-form" name="contact">
+                <label for="company" style="font-style: italic;">Jo Web Designs:</label>
 
                 <label for="name">First Name:</label>
                 <input type="text" id="name" name="first-name" required>
@@ -118,11 +119,13 @@
         </div>
         <div class="footer-links">
             <a href="index.html">Home</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="contact.html">Contact Us</a>
+            
+            
     </footer>
     <script src="whole.js"></script>
-    <script>document.addEventListener('DOMContentLoaded', () => {
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
         const fabMenu     = document.querySelector('.fab-menu');
         const fabToggle   = document.getElementById('fab-toggle');
         const fabItems    = document.querySelector('.fab-items');
@@ -139,59 +142,66 @@
             fabMenu.classList.remove('expanded');
           }
         });
+
       });
     </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-          const form         = document.getElementById('contact-form');
-          const successModal = document.querySelector('.form-complete');
-          const closeBtn     = document.querySelector('.close-success');
-        
-          form.addEventListener('submit', async e => {
-            e.preventDefault();               // stop page reload
-        
-            // 1) Gather the values you need to pass to your function
-            const data = {
-              firstName: form['first-name'].value,
-              lastName:  form.surname.value,
-              phone:     form.phone.value,
-              email:     form.email.value,
-              preferredContact: form['preferred-contact'].value,
-              topic:     form.topic.value,
-              message:   form.message.value
-            };
-        
-            try {
-              // 2) Call your Netlify Function
-              await fetch('/.netlify/functions/sendContactEmail', {
-                method:  'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body:    JSON.stringify(data)
-              });
-        
-              // 3) On success, show the modal and reset
-              successModal.style.display = 'flex';
-              form.reset();
-        
-            } catch (err) {
-              console.error('Email function error:', err);
-              alert('Oops! Something went wrong sending your message.');
-            }
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form         = document.getElementById('contact-form');
+      const successModal = document.querySelector('.form-complete');
+      const closeBtn     = document.querySelector('.close-success');
+    
+      form.addEventListener('submit', async e => {
+        e.preventDefault();               // stop page reload
+    
+        console.log('Submit handler fired');      // ← add this
+    
+        // 1) Gather the values you need to pass to your function
+        const data = {
+          firstName:        form['first-name'].value,
+          lastName:         form.surname.value,
+          phone:            form.phone.value,
+          email:            form.email.value,
+          preferredContact: form['preferred-contact'].value,
+          topic:            form.topic.value,
+          message:          form.message.value
+        };
+    
+        try {
+          // 2) Call your Netlify Function
+          const res = await fetch('/.netlify/functions/sendContactEmail', {
+            method:  'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body:    JSON.stringify(data)
           });
-        
-          // Close when X clicked
-          closeBtn.addEventListener('click', () => {
-            successModal.style.display = 'none';
-          });
-        
-          // Close when clicking outside
-          successModal.addEventListener('click', e => {
-            if (e.target === successModal) {
-              successModal.style.display = 'none';
-            }
-          });
-        });
-        </script>
+    
+          console.log('Function response status:', res.status);          // ← add this
+          console.log('Function response body:', await res.text());      // ← and this
+    
+          // 3) On success, show the modal and reset
+          successModal.style.display = 'flex';
+          form.reset();
+    
+        } catch (err) {
+          console.error('Email function error:', err);
+          alert('Oops! Something went wrong sending your message.');
+        }
+      });
+    
+      // Close when X clicked
+      closeBtn.addEventListener('click', () => {
+        successModal.style.display = 'none';
+      });
+    
+      // Close when clicking outside
+      successModal.addEventListener('click', e => {
+        if (e.target === successModal) {
+          successModal.style.display = 'none';
+        }
+      });
+    });
+    </script>
+    
         
         
 </body>

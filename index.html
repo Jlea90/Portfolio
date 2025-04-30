@@ -27,27 +27,34 @@
             </nav>
         </div>
         <div class="fab-menu">
-            <button id="fab-toggle">+</button>
-            <div class="fab-items">
-              <a href="index.html">Home</a>
-              <a href="#about">About</a>
-              <a href="#portfolio">Portfolio</a>
-              <a href="#service">Services</a>
-              <a href="contact.html">Contact</a>
-            </div>
+          <button id="fab-toggle" aria-label="Open menu">☰</button>
+          <div class="fab-items">
+            <button class="fab-close" aria-label="Close menu">&times;</button>
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="index.html#portfolio">Portfolio</a>
+            <a href="index.html#service">Services</a>
+            <a href="index.html#skills">Skills</a>
+            <a href="contact.html">Contact</a>
           </div>
+        </div>
             
     </header>
 
     <main>
         <div class="hero">
-            <a href="contact.html" class="contact-button"><img src="images/hero.gif" alt="Jo Website Hero Image" class="hero-image"></a>
+            <a href="contact.html" class="contact-button"><img src="images/hero.gif" alt="Jo Website Hero Image" class="hero-image">
+            <img src="images/hero-mobile.gif" alt="Jo Website hero image" class="hero-image-mobile"></a>
             
         </div>
 
         <section class="about-section" id="about">
         <img src="images/Front End Developer.gif" alt="Section explaining Jo's work" class="about-image">
-        </section>
+          <img src="images/about-mobile.gif" alt="Section explaining Jo's work" class="about-image-mobile">
+            
+            <hr>
+            
+      </section>
 
         <section id="portfolio" class="portfolio-section">
             <h2>Past Work</h2>
@@ -59,14 +66,16 @@
                 from initial wireframes through final mockups.
             </p>
 
-            <div style="position: relative; width: 100%; height: 0; padding-top: 56.2500%;
-            padding-bottom: 0; box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); margin-top: 1.6em; margin-bottom: 0.9em; overflow: hidden;
-            border-radius: 8px; will-change: transform;">
-             <iframe loading="lazy" style="position: absolute; width: 100%; height: 100%; top: 0; left: 0; border: none; padding: 0;margin: 0;"
-               src="https://www.canva.com/design/DAGlyHwezuY/4sUYN3gggidoleiv_2lyRQ/view?embed" allowfullscreen="allowfullscreen" allow="fullscreen">
-             </iframe>
-           </div>
-           
+            <div class="portfolio-embed-container">
+              <div class="portfolio-overlay"></div>
+              <iframe
+                loading="lazy"
+                src="https://www.canva.com/design/DAGlyHwezuY/4sUYN3gggidoleiv_2lyRQ/view?embed"
+                allowfullscreen
+                allow="fullscreen"
+              ></iframe>
+            </div>
+            
           </section>
           
 
@@ -138,6 +147,7 @@
                 <h2>Skillset</h2>
                 <hr>
                 <img class="mobile-ready" src="images/mobile-ready.gif" alt="Skills Section" class="skills-image">
+                <img src="images/mobile-design-mobile.gif" alt="Skills Section" class="skills-image-mobile">
                 <!-- Front-End Development -->
   <div class="skill-container" id="set-1">
     <ul>
@@ -173,13 +183,14 @@
             </section>
             <section id="contact">
                 <a href="contact.html" class="contact-image">
-                <img src="images/contact-img.gif" alt="Contact Section" class="contact-image">
+                <img src="images/contact-img.gif" alt="Contact Section" class="contact-image-home">
+                <img src="images/home-contact-mobile.gif" alt="Contact Section" class="contact-image-home-mobile">
                 </a>
             </section>
 
             <footer>
                 <div class="footer-content">
-                    <p>&copy; 2023 Your Company Name. All rights reserved.</p>
+                    <p>&copy; 2025 Jo Web Designs. All rights reserved.</p>
                     <div class="social-icons">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-instagram"></i></a>
@@ -187,29 +198,84 @@
                     </div>
                 </div>
                 <div class="footer-links">
-                    <a href="privacy.html">Privacy Policy</a>
+                   
                     <a href="contact.html">Contact Us</a>
             </footer>
             <script src="whole.js"></script>
-            <script>document.addEventListener('DOMContentLoaded', () => {
-                const fabMenu     = document.querySelector('.fab-menu');
-                const fabToggle   = document.getElementById('fab-toggle');
-                const fabItems    = document.querySelector('.fab-items');
+            <script>
+              document.addEventListener('DOMContentLoaded', () => {
+                const fabMenu   = document.querySelector('.fab-menu');
+                const fabToggle = document.getElementById('fab-toggle');
+                const fabClose  = document.querySelector('.fab-close');
               
-                // Toggle menu open/closed
+                // Open/close via the FAB button
                 fabToggle.addEventListener('click', e => {
                   e.stopPropagation();
                   fabMenu.classList.toggle('expanded');
                 });
               
-                // Close menu when clicking outside
+                // Close via the X button
+                fabClose.addEventListener('click', e => {
+                  e.stopPropagation();
+                  fabMenu.classList.remove('expanded');
+                });
+              
+                // Close when clicking anywhere outside the menu
                 document.addEventListener('click', e => {
                   if (!e.target.closest('.fab-menu')) {
                     fabMenu.classList.remove('expanded');
                   }
                 });
               });
-            </script>
+              </script>
+              <script>
+                //open portfolio logic
+                document.addEventListener('DOMContentLoaded', () => {
+                  const container = document.querySelector('.portfolio-embed-container');
+                  const overlay   = container.querySelector('.portfolio-overlay');
+                  let returnTimer;
+
+                  // Show overlay (hide iframe)
+                  const showOverlay = () => {
+                    container.classList.remove('open');
+                  };
+
+                  // Schedule overlay to return after delay
+                  const scheduleReturn = () => {
+                    clearTimeout(returnTimer);
+                    returnTimer = setTimeout(showOverlay, 5000); // 5s after leave
+                  };
+
+                  // Cancel scheduled return if user re-enters
+                  const cancelReturn = () => {
+                    clearTimeout(returnTimer);
+                  };
+
+                  // 1) click to open
+                  overlay.addEventListener('click', () => {
+                    container.classList.add('open');
+
+                   // 2) When mouse/touch leaves the container, start the return timer
+                  container.addEventListener('mouseleave', scheduleReturn);
+                  // On mobile we also catch touchend to start timer
+                  container.addEventListener('touchend', scheduleReturn);
+
+                  // 3) If they come back in, cancel the timer
+                  container.addEventListener('mouseenter', cancelReturn);
+                  container.addEventListener('touchstart', cancelReturn);
+                   
+                  // always return overlay after X seconds on mobile even without leave
+                    if (window.matchMedia('(pointer: coarse)').matches) {
+                      overlay.addEventListener('click', () => {
+                        // start countdown immediately on open
+                        scheduleReturn();
+                      });
+                    }
+                });
+                });
+              </script>
+              
+              
 </body>
 
 </html>
