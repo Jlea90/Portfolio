@@ -98,13 +98,17 @@ header .desktop-nav {
     border-radius: 10%;
    
 }
+.fab-menu {
+    display: none; /* hide the FAB menu by default */
+}
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 858px) {
   /* hide the desktop nav */
   header .desktop-nav { display: none; }
 
   /* FAB toggle button */
   .fab-menu {
+    display: block;
     position: fixed;
     top: 10px;    /* same as your header’s padding */
     right: 15px;
@@ -128,7 +132,7 @@ header .desktop-nav {
     color: #93613d;
   }
   #fab-toggle {
-    width: 46px; height: 46px;
+    width: 66px; height: 66px;
     border-radius: 50%;
     background-color: #93613d;
     color: #fff;
@@ -136,6 +140,9 @@ header .desktop-nav {
     font-size: 1.8rem;
     cursor: pointer;
     box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    margin-right: 10px;
+    top: 5px;
+    position: relative;
   }
 
   /* full-screen dim + blur overlay behind menu */
