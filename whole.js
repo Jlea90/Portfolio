@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <h3>Custom Website Development</h3>
         <p>Starting at <strong>$300</strong> for basic site (up to 3 pages).</p>
         <p>Includes responsive design, basic animations, and a contact form.</p>
+        <p>Additional pages: <strong>$80</strong> each.</p>
       `,
       ux: `
         <h3>UI/UX Design</h3>
